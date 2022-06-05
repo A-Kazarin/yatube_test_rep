@@ -23,10 +23,17 @@
             все посты пользователя
           </a>
         </li>
+        <li class="list-group-item">
+            {% if user == post.author %}
+          <a href="{% url 'posts:post_edit' post.id %}">
+            редактировать запись
+          </a>
+            {% endif %}
+        </li>
       </ul>
     </aside>
     <article class="col-12 col-md-9">
-      <p> {{ post.text }} </p>
+      <p> {{ post.text|linebreaks }} </p>
     </article>
   </div>
 {% endblock %}
