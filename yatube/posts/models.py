@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.conf import settings
 
 User = get_user_model()
 
@@ -24,6 +25,9 @@ class Post(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ['-pub_date']
+
+    def __str__(self):
+        return self.text[:settings.LETTERS_LIMIT]
 
 
 class Group(models.Model):
