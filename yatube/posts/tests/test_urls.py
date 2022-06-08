@@ -3,12 +3,12 @@ from http import HTTPStatus
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from posts.models import Group, Post, User
+from yatube.posts.models import Group, Post, User
 
 URL_INDEX = reverse('posts:index')
-URL_POST_DETAIL = reverse('posts:post_detail')
-URL_PROFILE = reverse('posts:profile')
-URL_GROUP_LIST = reverse('posts:group_list')
+URL_POST_DETAIL = reverse('posts:post_detail', kwargs={'post_id': self.post.pk})
+URL_PROFILE = reverse('posts:profile', kwargs={'username': self.user.username})
+URL_GROUP_LIST = reverse('posts:group_list', kwargs={'group_id':self.post.group})
 URL_CREATE_POST = reverse('posts:post_create')
 
 
@@ -27,7 +27,7 @@ class PostURLTests(TestCase):
         cls.test_post = Post.objects.create(
             text='Тестовый пост',
             author=cls.test_post_author,
-            group= self.group
+            group=cls.group
         )
         cls.URL_TEST_POST_DETAIL = reverse(
             'posts:post_detail',
@@ -44,7 +44,6 @@ class PostURLTests(TestCase):
         self.authorized_client.force_login(self.user)
         self.author_client = Client()
         self.author_client.force_login(PostURLTests.test_post_author)
-
 
     def test_posts_urls_use_correct_template(self):
         """Проверка шаблонов приложения posts прошла успешно."""
@@ -76,19 +75,19 @@ class PostURLTests(TestCase):
             self.assertEqual(
                 client.get(address).status_code,
                 status,
-                f'{address} для {client} работает неправильно'
+                f'{address} для {client} работает неправильно')
 
     def test_redirect(self):
         address_redirect_client = [
             [
                 URL_CREATE_POST,
-                f'/auth/login/?next={revesrse(posts:create_post)}',
+                f'/auth/login/?next={reverse(URL_CREATE_POST)}',
                 self.client
             ]
         ]
-        for test in address_redirect_client :
+        for test in address_redirect_client:
             address, exp_redirect, client = test
-            response = client.get(f'/auth/login/?next={revesrse(posts:create_post)}') # кое что добавить в get
+            response = client.get(f'/auth/login/?next={reverse(URL_CREATE_POST)}')  # кое что добавить в get
             self.assertRedirects(
                 response,
                 exp_redirect
