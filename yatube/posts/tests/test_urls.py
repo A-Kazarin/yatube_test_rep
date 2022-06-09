@@ -5,8 +5,8 @@ from django.urls import reverse
 
 from posts.models import Group, Post, User
 
-AUTHOR_USERNAME = username
-GROUP_SLUG = slug
+AUTHOR_USERNAME = 'TestName'
+GROUP_SLUG = 'TestSlug'
 
 URL_INDEX = reverse('posts:index')
 URL_POST_DETAIL = reverse('posts:post_detail', args='PostURLTests.URL_TEST_POST_DETAIL')
@@ -20,7 +20,7 @@ class PostURLTests(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.test_post_author = User.objects.create_user(
-            AUTHOR_USERNAME
+            username=AUTHOR_USERNAME
         )
         cls.test_group = Group.objects.create(
             title='Тестовая группа',
