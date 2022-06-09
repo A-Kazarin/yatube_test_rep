@@ -3,12 +3,15 @@ from http import HTTPStatus
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from yatube.posts.models import Group, Post, User
+from posts.models import Group, Post, User
+
+AUTHOR_USERNAME = username
+GROUP_SLUG = slug
 
 URL_INDEX = reverse('posts:index')
 URL_POST_DETAIL = reverse('posts:post_detail', kwargs={'post_id': self.post.pk})
-URL_PROFILE = reverse('posts:profile', kwargs={'username': self.user.username})
-URL_GROUP_LIST = reverse('posts:group_list', kwargs={'group_id':self.post.group})
+URL_PROFILE = reverse('posts:profile', args=AUTHOR_USERNAME)
+URL_GROUP_LIST = reverse('posts:group_list', args=GROUP_SLUG)
 URL_CREATE_POST = reverse('posts:post_create')
 
 
@@ -17,17 +20,17 @@ class PostURLTests(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.test_post_author = User.objects.create_user(
-            username=AUTHOR_USERNAME
+            AUTHOR_USERNAME
         )
         cls.test_group = Group.objects.create(
             title='Тестовая группа',
-            slug=GROUP_SLUG,
+            GROUP_SLUG,
             description='Тестовая группа.Описание'
         )
         cls.test_post = Post.objects.create(
             text='Тестовый пост',
             author=cls.test_post_author,
-            group=cls.group
+            group=cls.group.id
         )
         cls.URL_TEST_POST_DETAIL = reverse(
             'posts:post_detail',
@@ -48,11 +51,11 @@ class PostURLTests(TestCase):
     def test_posts_urls_use_correct_template(self):
         """Проверка шаблонов приложения posts прошла успешно."""
         address_template_guest_client = {
-            'posts/index.html': '/',
-            'posts/post_detail.html': f'/posts/{self.post.id}/',
-            'posts/profile.html': f'/profile/{self.user.username}/',
-            'posts/group_list.html': f'/group/{self.group.slug}/',
-            'posts/create_post.html': '/create/',
+            URL_INDEX: 'posts/index.html',
+            URL_POST_DETAIL: 'posts/post_detail.html',
+            URL_PROFILE: 'posts/profile.html',
+            URL_GROUP_LIST: 'posts/group_list.html',
+            URL_CREATE_POST: 'posts/create_post.html',
         }
         for address, expected_template in address_template_guest_client.items():
             with self.subTest(address=address):
@@ -67,8 +70,8 @@ class PostURLTests(TestCase):
     def test_location(self):
         addresses = [
             [URL_INDEX, HttpSTATUS.OK, self.client],
-            [PostURLSTest.URL_TEST_POST_EDIT, HttpSTATUS.OK, self.author_client],
-            [PostURLSTest.URL_TEST_POST_EDIT, HttpSTATUS.FOUND, self.authorized_client],
+            [PostURLSTest.URL_TEST_POST_EDIT, HTTPStatus.OK, self.author_client],
+            [PostURLSTest.URL_TEST_POST_EDIT, HTTPStatus.FOUND, self.authorized_client],
         ]
         for test in addresses:
             address, status, client = test
