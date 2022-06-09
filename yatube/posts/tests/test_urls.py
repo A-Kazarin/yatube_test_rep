@@ -9,7 +9,6 @@ AUTHOR_USERNAME = 'TestName'
 GROUP_SLUG = 'TestSlug'
 
 URL_INDEX = reverse('posts:index')
-URL_POST_DETAIL = reverse('posts:post_detail', args='PostURLTests.URL_TEST_POST_DETAIL')
 URL_PROFILE = reverse('posts:profile', args='AUTHOR_USERNAME')
 URL_GROUP_LIST = reverse('posts:group_list', args='GROUP_SLUG')
 URL_CREATE_POST = reverse('posts:post_create')
@@ -52,7 +51,7 @@ class PostURLTests(TestCase):
         """Проверка шаблонов приложения posts прошла успешно."""
         address_template_guest_client = {
             URL_INDEX: 'posts/index.html',
-            URL_POST_DETAIL: 'posts/post_detail.html',
+            PostURLTests.URL_TEST_POST_DETAIL: 'posts/post_detail.html',
             URL_PROFILE: 'posts/profile.html',
             URL_GROUP_LIST: 'posts/group_list.html',
             URL_CREATE_POST: 'posts/create_post.html',
