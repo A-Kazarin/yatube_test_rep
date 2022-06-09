@@ -24,7 +24,7 @@ class PostURLTests(TestCase):
         )
         cls.test_group = Group.objects.create(
             title='Тестовая группа',
-            GROUP_SLUG,
+            slug=GROUP_SLUG,
             description='Тестовая группа.Описание'
         )
         cls.test_post = Post.objects.create(
@@ -69,9 +69,13 @@ class PostURLTests(TestCase):
 
     def test_location(self):
         addresses = [
-            [URL_INDEX, HttpSTATUS.OK, self.client],
-            [PostURLSTest.URL_TEST_POST_EDIT, HTTPStatus.OK, self.author_client],
-            [PostURLSTest.URL_TEST_POST_EDIT, HTTPStatus.FOUND, self.authorized_client],
+            [URL_INDEX, HTTPStatus.OK, self.client],
+            [PostURLTests.URL_TEST_POST_EDIT, HTTPStatus.OK, self.author_client],
+            [PostURLTests.URL_TEST_POST_EDIT, HTTPStatus.FOUND, self.authorized_client],
+            [URL_GROUP_LIST, HTTPStatus.OK, self.client],
+            [URL_PROFILE, HTTPStatus.OK, self.client],
+            [URL_CREATE_POST, HTTPStatus.OK, self.authorized_client]
+
         ]
         for test in addresses:
             address, status, client = test
