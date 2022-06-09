@@ -9,9 +9,9 @@ AUTHOR_USERNAME = username
 GROUP_SLUG = slug
 
 URL_INDEX = reverse('posts:index')
-URL_POST_DETAIL = reverse('posts:post_detail', kwargs={'post_id': self.post.pk})
-URL_PROFILE = reverse('posts:profile', args=AUTHOR_USERNAME)
-URL_GROUP_LIST = reverse('posts:group_list', args=GROUP_SLUG)
+URL_POST_DETAIL = reverse('posts:post_detail', args='PostURLTests.URL_TEST_POST_DETAIL')
+URL_PROFILE = reverse('posts:profile', args='AUTHOR_USERNAME')
+URL_GROUP_LIST = reverse('posts:group_list', args='GROUP_SLUG')
 URL_CREATE_POST = reverse('posts:post_create')
 
 
