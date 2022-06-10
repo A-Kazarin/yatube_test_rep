@@ -87,13 +87,18 @@ class PostURLTests(TestCase):
         address_redirect_client = [
             [
                 URL_CREATE_POST,
-                f'/auth/login/?next={reverse(URL_CREATE_POST)}',
+                f'/auth/login/?next={URL_CREATE_POST}',
                 self.client
-            ]
+            ],
+            [
+                PostURLTests.URL_TEST_POST_EDIT,
+                f'/auth/login/?next={PostURLTests.URL_TEST_POST_EDIT}',
+                self.client
+            ],
         ]
         for test in address_redirect_client:
             address, exp_redirect, client = test
-            response = client.get(f'/auth/login/?next={reverse(URL_CREATE_POST)}')  # кое что добавить в get
+            response = client.get(address, follow=True)  # кое что добавить в get
             self.assertRedirects(
                 response,
                 exp_redirect
