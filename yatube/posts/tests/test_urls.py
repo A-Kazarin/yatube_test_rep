@@ -48,7 +48,7 @@ class PostURLTests(TestCase):
         self.author_client.force_login(PostURLTests.test_post_author)
 
     def test_posts_urls_use_correct_template(self):
-        """Проверка шаблонов приложения posts прошла успешно."""
+        """Проверка шаблонов приложения posts."""
         address_template_guest_client = {
             URL_INDEX: 'posts/index.html',
             PostURLTests.URL_TEST_POST_DETAIL: 'posts/post_detail.html',
@@ -67,6 +67,7 @@ class PostURLTests(TestCase):
                 )
 
     def test_location(self):
+        """Проверка адресов приложения posts."""
         addresses = [
             [URL_INDEX, HTTPStatus.OK, self.client],
             [PostURLTests.URL_TEST_POST_EDIT, HTTPStatus.OK, self.author_client],
@@ -84,6 +85,7 @@ class PostURLTests(TestCase):
                 f'{address} для {client} работает неправильно')
 
     def test_redirect(self):
+        """Проверка перенаправлений."""
         address_redirect_client = [
             [
                 URL_CREATE_POST,

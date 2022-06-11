@@ -127,7 +127,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 POSTS_PER_PAGE: int = 10
 POSTS_COUNT = 10
-
+LETTERS_LIMIT = 15
 
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
