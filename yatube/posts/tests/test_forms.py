@@ -1,15 +1,8 @@
+from .const import *
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from posts.models import Group, Post, User
-
-AUTHOR_USERNAME = 'TestName'
-GROUP_SLUG = 'TestSlug'
-
-URL_INDEX = reverse('posts:index')
-URL_PROFILE = reverse('posts:profile', args=[AUTHOR_USERNAME])
-URL_GROUP_LIST = reverse('posts:group_list', args=[GROUP_SLUG])
-URL_CREATE_POST = reverse('posts:post_create')
+from ..models import Group, Post, User
 
 
 class PostFormsTests(TestCase):
@@ -80,5 +73,5 @@ class PostFormsTests(TestCase):
         self.assertTrue(Post.objects.filter(
             group__slug=self.test_group.slug,
             text=form_data.get('text'),
-            post=PostFormsTests.test_post,
+            pk=PostFormsTests.test_post.pk,
         ).exists())

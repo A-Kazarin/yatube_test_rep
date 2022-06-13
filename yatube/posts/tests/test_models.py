@@ -30,3 +30,9 @@ class PostModelTest(TestCase):
         for value, expected in test_str:
             with self.subTest(value=value):
                 self.assertEqual(str(value), expected)
+
+    def test_title_help_text(self):
+        """help_text поля title совпадает с ожидаемым."""
+        task = PostModelTest.group
+        help_text = task._meta.get_field('title').help_text
+        self.assertEqual(help_text, 'максимум 200 символов')

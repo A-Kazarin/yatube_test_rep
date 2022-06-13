@@ -1,17 +1,10 @@
 from http import HTTPStatus
 
+from .const import *
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from posts.models import Group, Post, User
-
-AUTHOR_USERNAME = 'TestName'
-GROUP_SLUG = 'TestSlug'
-
-URL_INDEX = reverse('posts:index')
-URL_PROFILE = reverse('posts:profile', args=[AUTHOR_USERNAME])
-URL_GROUP_LIST = reverse('posts:group_list', args=[GROUP_SLUG])
-URL_CREATE_POST = reverse('posts:post_create')
+from ..models import Group, Post, User
 
 
 class PostURLTests(TestCase):
@@ -56,7 +49,8 @@ class PostURLTests(TestCase):
             URL_GROUP_LIST: 'posts/group_list.html',
             URL_CREATE_POST: 'posts/create_post.html',
         }
-        for address, expected_template in address_template_guest_client.items():
+        for address, expected_template \
+                in address_template_guest_client.items():
             with self.subTest(address=address):
                 response = self.author_client.get(address)
                 self.assertTemplateUsed(
@@ -70,8 +64,10 @@ class PostURLTests(TestCase):
         """Проверка адресов приложения posts."""
         addresses = [
             [URL_INDEX, HTTPStatus.OK, self.client],
-            [PostURLTests.URL_TEST_POST_EDIT, HTTPStatus.OK, self.author_client],
-            [PostURLTests.URL_TEST_POST_EDIT, HTTPStatus.FOUND, self.authorized_client],
+            [PostURLTests.URL_TEST_POST_EDIT,
+             HTTPStatus.OK, self.author_client],
+            [PostURLTests.URL_TEST_POST_EDIT,
+             HTTPStatus.FOUND, self.authorized_client],
             [URL_GROUP_LIST, HTTPStatus.OK, self.client],
             [URL_PROFILE, HTTPStatus.OK, self.client],
             [URL_CREATE_POST, HTTPStatus.OK, self.authorized_client]
@@ -100,7 +96,7 @@ class PostURLTests(TestCase):
         ]
         for test in address_redirect_client:
             address, exp_redirect, client = test
-            response = client.get(address, follow=True)  # кое что добавить в get
+            response = client.get(address, follow=True)
             self.assertRedirects(
                 response,
                 exp_redirect
