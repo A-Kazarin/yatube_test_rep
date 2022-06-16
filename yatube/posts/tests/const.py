@@ -1,3 +1,5 @@
+from django.urls import reverse
+
 AUTHOR_USERNAME = 'TestName'
 GROUP_SLUG = 'TestSlug'
 

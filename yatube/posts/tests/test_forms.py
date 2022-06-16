@@ -1,4 +1,4 @@
-from .const import *
+from .const import AUTHOR_USERNAME, GROUP_SLUG, URL_PROFILE, URL_CREATE_POST
 from django.test import Client, TestCase
 from django.urls import reverse
 

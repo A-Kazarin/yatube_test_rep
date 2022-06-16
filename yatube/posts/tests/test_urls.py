@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
-from .const import *
+from .const import AUTHOR_USERNAME, GROUP_SLUG, URL_INDEX, URL_PROFILE
+from .const import URL_GROUP_LIST, URL_CREATE_POST
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -49,8 +50,8 @@ class PostURLTests(TestCase):
             URL_GROUP_LIST: 'posts/group_list.html',
             URL_CREATE_POST: 'posts/create_post.html',
         }
-        for address, expected_template \
-                in address_template_guest_client.items():
+        for address, expected_template in (
+                address_template_guest_client.items()):
             with self.subTest(address=address):
                 response = self.author_client.get(address)
                 self.assertTemplateUsed(
