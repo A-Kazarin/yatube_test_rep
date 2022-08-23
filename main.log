@@ -1,0 +1,28 @@
+2022-07-27 13:32:53,170 [INFO] | func: get_api_answer / line: 48 | Делаем запрос к endpoint https://practicum.yandex.ru/api/user_api/homework_statuses/;Параметры: {'from_date': 10}
+2022-07-27 13:32:53,194 [DEBUG] | func: _new_conn / line: 975 | Starting new HTTPS connection (1): practicum.yandex.ru:443
+2022-07-27 13:32:53,379 [DEBUG] | func: _make_request / line: 461 | https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=10 HTTP/1.1" 200 None
+2022-07-27 13:32:53,382 [INFO] | func: send_message / line: 33 | Отправка сообщения...
+2022-07-27 13:32:53,382 [DEBUG] | func: decorator / line: 129 | Entering: send_message
+2022-07-27 13:32:53,600 [DEBUG] | func: decorator / line: 131 | {'message_id': 11, 'channel_chat_created': False, 'date': 1658917973, 'supergroup_chat_created': False, 'entities': [], 'caption_entities': [], 'chat': {'id': 271492638, 'username': 'A_Kazarin', 'type': 'private', 'first_name': 'Alexander', 'last_name': 'Kazarin'}, 'new_chat_photo': [], 'new_chat_members': [], 'group_chat_created': False, 'photo': [], 'delete_chat_photo': False, 'text': "Сбой в работе программы: name 'HOMEWORK_VERDICTS' is not defined", 'from': {'is_bot': True, 'id': 5417288751, 'username': 'K_infobot', 'first_name': 'K_info_bot'}}
+2022-07-27 13:32:53,601 [DEBUG] | func: decorator / line: 132 | Exiting: send_message
+2022-07-27 13:32:53,601 [INFO] | func: send_message / line: 35 | Сообщение успешно отправлено в Telegram
+2022-07-27 13:32:53,601 [ERROR] | func: main / line: 123 | Сбой при отправке сообщения в Telegram
+Traceback (most recent call last):
+  File "/Users/a_kazarin/Dev/homework_bot/homework.py", line 110, in main
+    current_status = parse_status(homeworks[0])
+  File "/Users/a_kazarin/Dev/homework_bot/homework.py", line 83, in parse_status
+    verdict = HOMEWORK_VERDICTS.get(homework_status)
+NameError: name 'HOMEWORK_VERDICTS' is not defined
+2022-07-27 13:34:09,558 [INFO] | func: get_api_answer / line: 48 | Делаем запрос к endpoint https://practicum.yandex.ru/api/user_api/homework_statuses/;Параметры: {'from_date': 10}
+2022-07-27 13:34:09,569 [DEBUG] | func: _new_conn / line: 975 | Starting new HTTPS connection (1): practicum.yandex.ru:443
+2022-07-27 13:34:09,885 [DEBUG] | func: _make_request / line: 461 | https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=10 HTTP/1.1" 200 None
+2022-07-27 13:34:09,889 [INFO] | func: send_message / line: 33 | Отправка сообщения...
+2022-07-27 13:34:09,889 [DEBUG] | func: decorator / line: 129 | Entering: send_message
+2022-07-27 13:34:10,129 [DEBUG] | func: decorator / line: 131 | {'text': 'Изменился статус проверки работы "A-Kazarin__hw05_final.zip". Работа проверена: ревьюеру всё понравилось. Ура!', 'caption_entities': [], 'group_chat_created': False, 'chat': {'id': 271492638, 'last_name': 'Kazarin', 'username': 'A_Kazarin', 'first_name': 'Alexander', 'type': 'private'}, 'date': 1658918050, 'message_id': 12, 'channel_chat_created': False, 'new_chat_photo': [], 'photo': [], 'supergroup_chat_created': False, 'new_chat_members': [], 'entities': [], 'delete_chat_photo': False, 'from': {'username': 'K_infobot', 'is_bot': True, 'first_name': 'K_info_bot', 'id': 5417288751}}
+2022-07-27 13:34:10,130 [DEBUG] | func: decorator / line: 132 | Exiting: send_message
+2022-07-27 13:34:10,130 [INFO] | func: send_message / line: 35 | Сообщение успешно отправлено в Telegram
+2022-07-27 13:44:10,114 [INFO] | func: get_api_answer / line: 48 | Делаем запрос к endpoint https://practicum.yandex.ru/api/user_api/homework_statuses/;Параметры: {'from_date': 1658918049}
+2022-07-27 13:44:10,125 [DEBUG] | func: _new_conn / line: 975 | Starting new HTTPS connection (1): practicum.yandex.ru:443
+2022-07-27 13:44:10,450 [DEBUG] | func: _make_request / line: 461 | https://practicum.yandex.ru:443 "GET /api/user_api/homework_statuses/?from_date=1658918049 HTTP/1.1" 200 42
+2022-07-27 13:44:10,454 [INFO] | func: send_message / line: 33 | Отправка сообщения...
+2022-07-27 13:44:10,454 [DEBUG] | func: decorator / line: 129 | Entering: send_message
